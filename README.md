@@ -5,4 +5,4 @@ It then sends a Mac OS desktop notification with the results, which when clicked
 
 Run by typing in the command line `python3 run.py software+developer` for example if you want to search for Software Developer jobs.
 
-See screenshots in this repo's Wiki: https://github.com/stajahlee/job-search-web-scraper/wik
+See screenshots in this repo's Wiki: https://github.com/stajahlee/job-search-web-scraper/wiki
