@@ -1,23 +1,19 @@
 # **********************************************************************************
 #
-#  PROGRAM THAT FINDS OHIO UNIVERSITY JOBS POSTINGS WITH MY DESIRED KEYWORDS 
-#  AND NOTIFIES ME ON MY DESKTOP
+#  PROGRAM THAT FINDS OHIO UNIVERSITY JOBS POSTINGS WITH KEYWORD PROVIDED AS A 
+#  COMMAND LINE ARGUMENT AND NOTIFIES ON MAC DESKTOP
 #
 #  https://www.ohiouniversityjobs.com/postings/search
-#  ->then input the keywords that found new postings
+#  search keyword is input and direct link when notification clicked
 #
 #  Author: Stajah Lee Hoeflich | stajah@stajahlee.com
-#  Sun Jul 23 16:09:17 2017
+#  Fri Aug  4 22:52:06 2017
 #
 # **********************************************************************************
 import urllib.request
 import sys	
 import ssl
 import os
-import smtplib # to send emails
-import schedule # script runs on timer
-import time
-
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
 # FUNCTION:....open_page
@@ -96,21 +92,21 @@ def find_jobs(keyword):
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
 def notify_me_about_awesome_OU_jobs_computer(keyword):
 	link = 'https://www.ohiouniversityjobs.com/postings/search?utf8=%E2%9C%93&query='
-	link = link + keyword
-	link = link +'&query_v0_posted_at_date=&225=&commit=Search'		
-	# keywords = []
-	# keywords.append('software')
-	# keywords.append('developer')
-	# keywords.append('information+technology')
-	# count = 0
-	# while count < len(keywords):
-	title = '-title {!r}'.format("My Job Search")
-	subtitle = '-subtitle {!r}'.format("Keyword: " + keyword)
-	message = '-message {!r}'.format(find_jobs(keyword))
+	link = link + keyword + '&query_v0_posted_at_date=&225=&commit=Search'	
+	result=find_jobs(keyword)
+	result=result[:result.find(":")]
+
+	# terminal-notifier options:
+	title = '-title {!r}'.format("Job Search With Keyword:")
+	subtitle = '-subtitle {!r}'.format(keyword)
+	message = '-message {!r}'.format(result + ". Click to view results.")
 	sound = '-sound {!r}'.format("Purr.aiff")
 	url = '-open {!r}'.format(link)
-	os.system('terminal-notifier {}'.format(' '.join([message, title, subtitle, sound, url])))
-	# count += 1
+	finish = '-actions {!r}'.format("Finish")
+	timeout = '-timeout {!r}'.format(10)
+
+	# terminal-notifier sends notification to Mac OS with above options
+	os.system('terminal-notifier {}'.format(' '.join([message, title, subtitle, sound, url, finish, timeout])))
 
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
@@ -122,14 +118,11 @@ def notify_me_about_awesome_OU_jobs_computer(keyword):
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
 def main():	
 	
-	notify_me_about_awesome_OU_jobs_computer(sys.argv[1])
-	
-	# schedule.every(5).seconds.do(notify)
-	# schedule.every().day.at("5:00").do(notify)
-	# while 1:
-	#     schedule.run_pending()
-	#     time.sleep(1)
-	sys.exit()
+	if (len(sys.argv)>1):
+		notify_me_about_awesome_OU_jobs_computer(sys.argv[1])
+	else:
+		print('Run again with a search term provided')
+		sys.exit()
 
 if __name__ == "__main__":
 	main()
