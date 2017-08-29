@@ -60,6 +60,30 @@ def make_postings_list(page_str):
 
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
+# FUNCTION:....set_search_url
+# PURPOSE:.....uses the url for the OU job search page with specific keyword
+# PARAMETERS:..string - keyword for search parameter
+# RETURNS:.....string that is the url needed in current search
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
+def set_search_url(keyword):
+	link = 'https://www.ohiouniversityjobs.com/postings/search?utf8=%E2%9C%93&query='
+	link = link + keyword
+	link = link +'&query_v0_posted_at_date=&225=&commit=Search'
+	return link
+
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
+# FUNCTION:....make_page_string
+# PURPOSE:.....with given keyword search parameter makes the entire html of a page
+# 			   into one single string
+# PARAMETERS:..keyword - a string
+# RETURNS:.....a string - which is full html of a page
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
+def make_page_string(keyword):
+	return (open_page(set_search_url(keyword)))
+
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
 # FUNCTION:....find_jobs
 # PURPOSE:.....given a specific keyword the OU job search link will find postings
 #              with the keyword as a query parameter
@@ -67,21 +91,31 @@ def make_postings_list(page_str):
 # RETURNS:.....string describing how many jobs found and their titles, or if none
 #              found, will return none-found-message 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #	
-def find_jobs(keyword):
-	link = 'https://www.ohiouniversityjobs.com/postings/search?utf8=%E2%9C%93&query='
-	link = link + keyword
-	link = link +'&query_v0_posted_at_date=&225=&commit=Search'	 
-	page_str = open_page(link)
-	posts = make_postings_list(page_str)
+def find_jobs(keyword): 
+	posts = make_postings_list(make_page_string(keyword))
 	jobs = ""
 	if (len(posts)!=0):
 		for i in posts:
 			jobs += (" " + i + "\n")
-		print ("\n\nKeyword: " + keyword + "\n------------------------------------\n" + str(len(posts)) + ' jobs found:\n' + jobs)
+		print ("\n\nKeyword: " + keyword)
+		print ("\n------------------------------------\n")
+		print(str(len(posts)) + ' jobs found:\n' + jobs)
 		return (str(len(posts)) + ' jobs found: ' + jobs)
 	else:
-		print ("\n\nKeyword: " + keyword + '\n------------------------------------\nNo ' + keyword + ' jobs found today - sorry :(')
-		return ('No ' + keyword + ' jobs found today - sorry :(')
+		print ("\n\nKeyword: " + keyword)
+		print ("\n------------------------------------\n")		
+		print ('No ' + keyword + ' jobs found today - sorry :(')
+		return ('No ' + keyword + ' jobs found today.')
+
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
+# FUNCTION:....num_jobs
+# PURPOSE:.....retrieve number of jobs found with a given search parameter
+# PARAMETERS:..keyword | string
+# RETURNS:.....integer - number of jobs found
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
+def num_jobs(keyword):
+	return (len(make_postings_list(make_page_string(keyword))))
 
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
@@ -91,19 +125,21 @@ def find_jobs(keyword):
 # RETURNS:.....none
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
 def notify_me_about_awesome_OU_jobs_computer(keyword):
-	link = 'https://www.ohiouniversityjobs.com/postings/search?utf8=%E2%9C%93&query='
-	link = link + keyword + '&query_v0_posted_at_date=&225=&commit=Search'	
 	result=find_jobs(keyword)
 	result=result[:result.find(":")]
 
 	# terminal-notifier options:
 	title = '-title {!r}'.format("Job Search With Keyword:")
 	subtitle = '-subtitle {!r}'.format(keyword)
-	message = '-message {!r}'.format(result + ". Click to view results.")
 	sound = '-sound {!r}'.format("Purr.aiff")
-	url = '-open {!r}'.format(link)
+	url = '-open {!r}'.format(set_search_url(keyword))
 	finish = '-actions {!r}'.format("Finish")
 	timeout = '-timeout {!r}'.format(10)
+
+	if (num_jobs(keyword) != 0):
+		message = '-message {!r}'.format(result + ". Click to view results.")
+	else:
+		message = '-message {!r}'.format(result + ".")
 
 	# terminal-notifier sends notification to Mac OS with above options
 	os.system('terminal-notifier {}'.format(' '.join([message, title, subtitle, sound, url, finish, timeout])))
