@@ -1,4 +1,4 @@
-<img src="c1.staticflickr.com/5/4392/37056288002_2344a090d3_c.jpg" alt="ReFrIeD logo" title="ReFrIeD" align="right" height="60" />
+<a href="http://tinypic.com?ref=zx1yzr" target="_blank"><img src="http://i68.tinypic.com/zx1yzr.jpg" border="0" alt="Image and video hosting by TinyPic"></a>
 
 Aimeos TYPO3 extension
 ======================
