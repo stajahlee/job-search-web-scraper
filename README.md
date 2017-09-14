@@ -1,6 +1,6 @@
-<!-- <a href="https://aimeos.org/"> -->
-    <img src="http://c1.staticflickr.com/5/4392/37056288002_2344a090d3_c.jpg" alt="ReFrIeD logo" title="Aimeos" align="right" height="60" />
-<!-- </a> -->
+<a href=>
+    <img src="c1.staticflickr.com/5/4392/37056288002_2344a090d3_c.jpg" alt="ReFrIeD logo" title="Aimeos" align="right" height="60" />
+</a>
 
 Aimeos TYPO3 extension
 ======================
