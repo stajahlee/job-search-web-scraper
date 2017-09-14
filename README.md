@@ -1,17 +1,15 @@
-<a href="http://tinypic.com?ref=zx1yzr" target="_blank"><img src="http://i68.tinypic.com/zx1yzr.jpg" border="0" alt="Image and video hosting by TinyPic"></a>
+<a href="http://tinypic.com?ref=zx1yzr" target="_blank"><img src="http://i68.tinypic.com/zx1yzr.jpg" border="0" height="60" alt="ReFrIeD Logo"></a>
 
-Aimeos TYPO3 extension
+
+<!-- See examples from Aimeos GitHub Repo -->
+Modern Cloud Based Academic Inventory System
 ======================
 
-The repository contains the TYPO3 extension integrating the Aimeos e-commerce
-library into TYPO3. The extension provides plugins for e.g. filter, list and
-detail views, for searching products as well as baskets and the checkout process.
-
-[![Aimeos TYPO3 demo](https://aimeos.org/fileadmin/user_upload/typo3-demo.jpg)](http://typo3.demo.aimeos.org/)
+The repository contains ......
 
 ## Table of content
 
-- [Installation](#installation)
+<!-- - [Installation](#installation)
     - [TER](#typo3-extension-repository)
     - [Composer](#composer)
 - [TYPO3 setup](#typo3-setup)
@@ -22,19 +20,19 @@ detail views, for searching products as well as baskets and the checkout process
     - [Go to the import view](#go-to-the-import-view)
     - [Import the uploaded page tree file](#import-the-uploaded-page-tree-file)
 - [License](#license)
-- [Links](#links)
+- [Links](#links) -->
 
 ## Installation
 
 ### TYPO3 extension repository
 
-If you want to install Aimeos into your existing TYPO3 installation, the [Aimeos extension from the TER](https://typo3.org/extensions/repository/view/aimeos) is recommended. You can download and install it directly from the Extension Manager of your TYPO3 instance.
+<!-- If you want to install Aimeos into your existing TYPO3 installation, the [Aimeos extension from the TER](https://typo3.org/extensions/repository/view/aimeos) is recommended. You can download and install it directly from the Extension Manager of your TYPO3 instance.
 
-For new TYPO3 installations, there's a 1-click [Aimeos distribution](https://typo3.org/extensions/repository/view/aimeos_dist) available too. Choose the Aimeos distribution from the list of available distributions in the Extension Manager and you will get a completely set up shop system including demo data for a quick start.
+For new TYPO3 installations, there's a 1-click [Aimeos distribution](https://typo3.org/extensions/repository/view/aimeos_dist) available too. Choose the Aimeos distribution from the list of available distributions in the Extension Manager and you will get a completely set up shop system including demo data for a quick start. -->
 
 ### Composer
 
-The latest version can be installed via composer too. This is especially useful if you want to create new TYPO3 installations automatically or play with the latest code. You need to install the [composer](https://getcomposer.org/) package first if it isn't already available:
+<!-- The latest version can be installed via composer too. This is especially useful if you want to create new TYPO3 installations automatically or play with the latest code. You need to install the [composer](https://getcomposer.org/) package first if it isn't already available:
 ```
 php -r "readfile('https://getcomposer.org/installer');" | php -- --filename=composer
 ```
@@ -72,13 +70,13 @@ In order to tell composer what it should install, you have to create a basic `co
 It will install TYPO3 and the latest Aimeos TYPO3 extension in the `./htdocs/` directory. Afterwards, the Aimeos composer script will be executed which copies some required files and adds a link to the Aimeos extensions placed in the `./ext/` directory. To start installation, execute composer on the command line in the directory where your `composer.json` is stored:
 ```
 composer update
-```
+``` -->
 
-## TYPO3 setup
+## Software setup
 
-### Extension
+<!-- <!-- ### Extension
 
-* Log into the TYPO3 back end
+<!-- * Log into the TYPO3 back end
 * Click on ''Admin Tools::Extension Manager'' in the left navigation
 * Click the icon with the little plus sign left from the Aimeos list entry (looks like a lego brick)
 * If a pop-up opens (only TYPO3 4.x) choose ''Make updates'' and "Close window" after the installation is done
@@ -89,17 +87,17 @@ composer update
 
 ### Database
 
-Afterwards, you have to execute the update script of the extension to create the required database structure:
+<!-- Afterwards, you have to execute the update script of the extension to create the required database structure:
 
 ![Execute update script](https://aimeos.org/docs/images/Aimeos-typo3-extmngr-update-7.x.png)
 
 ## Page setup
 
-The page setup for an Aimeos web shop is easy if you import the [standard page tree](https://aimeos.org/fileadmin/download/Aimeos-pages_two-columns_2.1.6.t3d) into your TYPO3 installation.
+<!-- The page setup for an Aimeos web shop is easy if you import the [standard page tree](https://aimeos.org/fileadmin/download/Aimeos-pages_two-columns_2.1.6.t3d) into your TYPO3 installation.
 
 ### Go to the import view
 
-* In Web::Page, root page (the one with the globe)
+<!-- * In Web::Page, root page (the one with the globe)
 * Right click on the globe
 * Move the cursor to "Branch actions"
 * In the sub-menu, click on "Import from .t3d"
@@ -152,3 +150,4 @@ It then sends a Mac OS desktop notification with the results, which when clicked
 Run by typing in the command line `python3 run.py software+developer` for example if you want to search for Software Developer jobs.
 
 See screenshots in this repo's Wiki: https://github.com/stajahlee/job-search-web-scraper/wiki
+ -->
