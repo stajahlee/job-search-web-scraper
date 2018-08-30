@@ -1,21 +1,22 @@
 import urllib.request
-import sys	
+import sys
 import ssl
 import os
 
 
+### returns the entire webpage as a string
 def open_page(link):
 	ctx = ssl.create_default_context()
 	ctx.check_hostname = False
 	ctx.verify_mode = ssl.CERT_NONE
 	req = urllib.request.Request(link)
-	response = urllib.request.urlopen(req, context = ctx)
-	charset = response.headers.get_content_charset()		
-	webpage = response.read().decode(charset)	
+	response = urllib.request.urlopen(req, context=ctx)
+	charset = response.headers.get_content_charset()
+	webpage = response.read().decode(charset)
 	return webpage
 
 
-
+### returns an array containing a posted job opening in each element
 def make_postings_list(page_str):
 	index = 0
 	posts_indices = []
@@ -28,12 +29,14 @@ def make_postings_list(page_str):
 		index += 19
 	for i in posts_indices:
 		posts.append(page_str[i+20:i+100])
-	count = 0	
+	count = 0
 	while count < len(posts):
 		posts[count] = posts[count][:posts[count].find('"')]
 		count += 1
 	return posts
 
+
+# returns the url with query as a string
 def set_search_url(keyword):
 	link = 'https://www.ohiouniversityjobs.com/postings/search?utf8=%E2%9C%93&query='
 	link = link + keyword
@@ -41,10 +44,12 @@ def set_search_url(keyword):
 	return link
 
 
+# returns a string of the webpage based on the query
 def make_page_string(keyword):
 	return (open_page(set_search_url(keyword)))
 
-	
+
+# returns a string of how many jobs and what they were	
 def find_jobs(keyword): 
 	posts = make_postings_list(make_page_string(keyword))
 	jobs = ""
@@ -61,11 +66,13 @@ def find_jobs(keyword):
 		print ('No ' + keyword + ' jobs found today - sorry :(')
 		return ('No ' + keyword + ' jobs found today.')
 
-
+	
+# returns the number of jobs that were found
 def num_jobs(keyword):
 	return (len(make_postings_list(make_page_string(keyword))))
 
 
+# OS X notification
 def notify_me_about_awesome_OU_jobs_computer(keyword):
 	result=find_jobs(keyword)
 	result=result[:result.find(":")]
@@ -87,7 +94,6 @@ def notify_me_about_awesome_OU_jobs_computer(keyword):
 	os.system('terminal-notifier {}'.format(' '.join([message, title, subtitle, sound, url, finish, timeout])))
 
 
-
 def main():	
 	
 	if (len(sys.argv)>1):
@@ -98,4 +104,3 @@ def main():
 
 if __name__ == "__main__":
 	main()
-
